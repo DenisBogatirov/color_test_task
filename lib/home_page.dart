@@ -1,3 +1,4 @@
+import 'package:color_test_task/color_generator.dart';
 import 'package:flutter/material.dart';
 
 /// Home page of the app
@@ -11,11 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _colorGenerator = ColorGenerator();
   Color _color = Colors.white;
 
   void _changeColor() {
     setState(() {
-      _color = Colors.red;
+      _color = _colorGenerator.next();
     });
   }
 
@@ -27,9 +29,16 @@ class _HomePageState extends State<HomePage> {
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           color: _color,
-          child: const Center(
-            // TODO: Add translation table
-            child: Text('Hello World'),
+          child: const SafeArea(
+            child: Center(
+              child: Card(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  // TODO: Add translation table
+                  child: Text('Hello World'),
+                ),
+              ),
+            ),
           ),
         ),
       ),
